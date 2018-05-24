@@ -31,6 +31,9 @@ class Map():
 
 
     def contains(self, key, containsFlag=False):
+        if (self.currentSize == 0):
+            return False
+
         bucketPlace = self.computeHash(key)
         for item in self.hashArray[bucketPlace]:
             if item[0] == key:
@@ -65,7 +68,6 @@ class Map():
                 self.hashArray.append([])
                 i += 1
             self.capacity *= 2
-        print(self.capacity)
 
         for bucket in self.hashArray:
             for item in bucket:
