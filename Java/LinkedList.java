@@ -94,6 +94,7 @@ class LinkedList {
         }
 
         pointer.next = pointer.next.next;
+        this.size -= 1;
         return pointer;
     }
 
