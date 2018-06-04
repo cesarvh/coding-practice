@@ -83,6 +83,20 @@ class LinkedList {
         this.size = 0;
     }
 
+    public Object remove(int index) {
+        if (index < this.size - 1) {
+            throw new IndexOutOfBoundsException();
+        }
+
+        ListNode pointer = new ListNode<Object>(e);
+        for (int i = 0; i < index; i += 1) {
+            pointer = pointer.next;
+        }
+
+        pointer.next = pointer.next.next;
+        return pointer;
+    }
+
     public boolean contains(Object o) {
         ListNode pointer = head;
         while (pointer != null) {
