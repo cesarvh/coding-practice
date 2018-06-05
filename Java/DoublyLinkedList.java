@@ -66,11 +66,14 @@ public class DoublyLinkedList {
         if (index < this.size / 2) {
             pointer = this.head;
             for (int i = 0; i != index; i++) {
+                // System.out.println(i);
                 pointer = pointer.next;
             }
         } else {
             pointer = this.tail;
-            for (int i = 0; i != index - this.size; i++) {
+            for (int i = 0; i != this.size - index; i++) {
+                System.out.println(i);
+                System.out.println(index - this.size);
                 pointer = pointer.previous;
             }
         }
@@ -133,23 +136,23 @@ public class DoublyLinkedList {
 
 
     public static void main(String[] args) {
-        LinkedList ll = new LinkedList();
+        DoublyLinkedList ll = new DoublyLinkedList();
 
-        ll.add(1);
-        ll.add(2);
-        ll.add(3);
-        ll.add(4);
-        ll.add(5);
-        ll.add(6);
-        ll.add(7);
-
-        ll.printList();
-
-        // ll.remove(4);
+        ll.addFront(1);
+        ll.addBack(2);
+        ll.addBack(3);
+        ll.addBack(4);
+        ll.addBack(5);
+        ll.addBack(6);
+        ll.addFront(0);
 
         ll.printList();
-        ll.clear();
+
+        ll.remove(4);
+
         ll.printList();
+        // ll.clear();
+        // ll.printList();
     }
 
 
