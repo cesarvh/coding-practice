@@ -1,3 +1,5 @@
+import javax.xml.transform.TransformerConfigurationException;
+
 class LinkedList {
     ListNode head;
     ListNode tail;
@@ -84,18 +86,36 @@ class LinkedList {
     }
 
     public Object remove(int index) {
-        if (index < this.size - 1) {
+        if (index > this.size - 1) {
             throw new IndexOutOfBoundsException();
         }
 
-        ListNode pointer = new ListNode<Object>(e);
-        for (int i = 0; i < index; i += 1) {
-            pointer = pointer.next;
-        }
 
-        pointer.next = pointer.next.next;
+        ListNode toRemove = this.head;
+        ListNode toSetPointer = null;
+        // ListNode fastPointer = this.head;
+
+        for (int i = 0; i < index - 1; i += 1) {
+            toSetPointer = toRemove;
+            toRemove = toRemove.next;
+        }
+        toSetPointer = toSetPointer.next.next;
+
+        // ListNode temp = pointer.next;
+        System.out.println("Removing " + toRemove.getElement());
+        // System.out.println("Removing " + temp.getElement());
+
+        // pointer.next = pointer.next.next;
         this.size -= 1;
-        return pointer;
+
+        if (index == 0) {
+            this.head = this.head.next;
+        }
+        if (index == this.size - 1) {
+            this.tail = toSetPointer;
+        }
+        toRemove.next = null;
+        return toRemove;
     }
 
     public boolean contains(Object o) {
@@ -147,21 +167,24 @@ class LinkedList {
     public static void main(String[] args) {
         LinkedList ll = new LinkedList();
 
+        ll.add(0);
         ll.add(1);
         ll.add(2);
         ll.add(3);
         ll.add(4);
         ll.add(5);
         ll.add(6);
-        ll.add(7);
 
         ll.printList();
 
-        // ll.remove(4);
+        ll.remove(4);
+        ll.printList();
+
+        ll.remove(0);
 
         ll.printList();
-        ll.clear();
-        ll.printList();
+        // ll.clear();
+        // ll.printList();
 
         // System.out.println(ll.get(0));
     }
